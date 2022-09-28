@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { AiFillGithub } from 'react-icons/ai'
 
 const wrapper = css`
   max-width: 1100px;
@@ -7,6 +8,10 @@ const wrapper = css`
 `
 
 const footer = css`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background: #432;
   text-align: center;
   padding: 26px 0;
@@ -17,13 +22,30 @@ const footer = css`
   }
 `
 
+const flexBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const iconStyle = css`
+  color: white;
+  font-size: 2rem;
+  margin: 0 10px;
+`
+
 export const Footer: React.FC = () => {
   return (
     <footer css={footer}>
-      <div css={wrapper}>
+      <div css={[wrapper, flexBox]}>
         <p>
           <small>&copy; 2022 d-takeuchi Blog</small>
         </p>
+        <div>
+          <a href='https://github.com/d-takeuchi' target={'_blank'}>
+            <AiFillGithub css={iconStyle} />
+          </a>
+        </div>
       </div>
     </footer>
   )
