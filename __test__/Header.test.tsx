@@ -7,9 +7,11 @@ import Home from '../pages'
 initTestHelpers()
 
 describe('Header', () => {
-  it('ヘッダーに見出し「Blog」が表示されている', () => {
-    render(<Home />)
-    expect(screen.getByTestId('main-title')).toHaveTextContent('Blog')
+  it('ロゴクリックでTOPページへと遷移する', async () => {
+    const { page } = await getPage({ route: '/index' })
+    render(page)
+    userEvent.click(screen.getByTestId('logo'))
+    expect(await screen.findByText('Hello World')).toBeInTheDocument()
   })
   it('ナビゲーションバーのTOPリンクからHomeページへと遷移する', async () => {
     const { page } = await getPage({ route: '/index' })
