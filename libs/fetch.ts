@@ -1,6 +1,5 @@
 import { Blog } from '../types/type'
-import { client } from './client'
-
+import fetch from 'node-fetch'
 interface getAllBlogResponse {
   contents: Blog[]
   totalCount: number
@@ -13,13 +12,16 @@ interface getBlogDataResponse {
 }
 
 export const getAllBlogIds = async () => {
-  const res = await client.get<getAllBlogResponse>({
-    endpoint: 'blog',
+  const res = await fetch(new URL(`${process.env.API_ENDPOINT}/blog`), {
+    method: 'GET',
+    headers: {
+      'X-MICROCMS-API-KEY': process.env.API_KEY,
+    },
   })
 
-  const blogs = res.contents
+  const blog = await res.json()
 
-  return blogs.map((blog) => {
+  return blog.data.contents.map((blog) => {
     return {
       params: {
         contentId: String(blog.id),
@@ -29,21 +31,36 @@ export const getAllBlogIds = async () => {
 }
 
 export const getAllBlogData = async () => {
-  const res = await client.get<getAllBlogResponse>({
-    endpoint: 'blog',
-  })
+  const res = await fetch(
+    new URL(`${process.env.NEXT_PUBLIC_RESTAPI_URL}/blog`),
+    {
+      method: 'GET',
+      headers: {
+        'X-MICROCMS-API-KEY': process.env.API_KEY,
+      },
+    }
+  )
 
+  const blog = await res.json()
+  console.log(blog)
   return {
-    blog: res.contents,
+    blog: blog.contents,
   }
 }
 export const getBlogData = async (contentId: string) => {
-  const res = await client.get<getBlogDataResponse>({
-    endpoint: 'blog',
-    contentId,
-  })
+  const res = await fetch(
+    new URL(`${process.env.API_ENDPOINT}/blog/${contentId}`),
+    {
+      method: 'GET',
+      headers: {
+        'X-MICROCMS-API-KEY': process.env.API_KEY,
+      },
+    }
+  )
+
+  const blog = await res.json()
 
   return {
-    blog: JSON.parse(JSON.stringify(res)) as Blog,
+    blog: JSON.parse(JSON.stringify(blog.data)) as Blog,
   }
 }

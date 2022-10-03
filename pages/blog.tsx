@@ -1,6 +1,5 @@
 import { Layout } from '../components/Layout'
 import { GetStaticProps, NextPage } from 'next'
-import { client } from '../libs/client'
 import type { Blog as BlogType } from '../types/type'
 import { getAllBlogData } from '../libs/fetch'
 import Link from 'next/link'
