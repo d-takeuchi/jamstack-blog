@@ -1,15 +1,5 @@
 import { Blog } from '../types/type'
 import fetch from 'node-fetch'
-interface getAllBlogResponse {
-  contents: Blog[]
-  totalCount: number
-  offset: number
-  limit: number
-}
-
-interface getBlogDataResponse {
-  contents: Blog
-}
 
 export const getAllBlogIds = async () => {
   const res = await fetch(new URL(`${process.env.API_ENDPOINT}/blog`), {
@@ -42,7 +32,6 @@ export const getAllBlogData = async () => {
   )
 
   const blog = await res.json()
-  console.log(blog)
   return {
     blog: blog.contents,
   }
