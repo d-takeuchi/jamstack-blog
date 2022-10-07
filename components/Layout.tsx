@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import { Footer } from './atoms/Footer'
@@ -14,12 +15,18 @@ export const Layout = (props: Props) => {
     <div>
       <Head>
         <title>{title}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
 
       <Header />
-      <main>{children}</main>
+      <main css={wrapper}>{children}</main>
       <Footer />
     </div>
   )
 }
+
+const wrapper = css`
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 4%;
+`
