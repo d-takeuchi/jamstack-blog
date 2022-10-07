@@ -6,4 +6,9 @@ export interface Blog {
   revisedAt: string
   title: string
   body: string
+  thumbnail: {
+    url: string
+    height: number
+    width: number
+  }
 }
