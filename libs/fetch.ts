@@ -2,7 +2,7 @@ import { Blog } from '../types/type'
 import fetch from 'node-fetch'
 
 export const getAllBlogIds = async () => {
-  const res = await fetch(new URL(`${process.env.API_ENDPOINT}/blog`), {
+  const res = await fetch(new URL(`${process.env.RESTAPI_URL}/blog`), {
     method: 'GET',
     headers: {
       'X-MICROCMS-API-KEY': process.env.API_KEY,
@@ -11,7 +11,7 @@ export const getAllBlogIds = async () => {
 
   const blog = await res.json()
 
-  return blog.data.contents.map((blog) => {
+  return blog.contents.map((blog) => {
     return {
       params: {
         contentId: String(blog.id),
@@ -21,15 +21,12 @@ export const getAllBlogIds = async () => {
 }
 
 export const getAllBlogData = async () => {
-  const res = await fetch(
-    new URL(`${process.env.NEXT_PUBLIC_RESTAPI_URL}/blog`),
-    {
-      method: 'GET',
-      headers: {
-        'X-MICROCMS-API-KEY': process.env.API_KEY,
-      },
-    }
-  )
+  const res = await fetch(new URL(`${process.env.RESTAPI_URL}/blog`), {
+    method: 'GET',
+    headers: {
+      'X-MICROCMS-API-KEY': process.env.API_KEY,
+    },
+  })
 
   const blog = await res.json()
   return {
@@ -38,7 +35,7 @@ export const getAllBlogData = async () => {
 }
 export const getBlogData = async (contentId: string) => {
   const res = await fetch(
-    new URL(`${process.env.API_ENDPOINT}/blog/${contentId}`),
+    new URL(`${process.env.RESTAPI_URL}/blog/${contentId}`),
     {
       method: 'GET',
       headers: {
@@ -47,9 +44,8 @@ export const getBlogData = async (contentId: string) => {
     }
   )
 
-  const blog = await res.json()
-
+  const blog: Blog = await res.json()
   return {
-    blog: JSON.parse(JSON.stringify(blog.data)) as Blog,
+    blog,
   }
 }

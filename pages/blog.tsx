@@ -1,8 +1,10 @@
-import { Layout } from '../components/Layout'
 import { GetStaticProps, NextPage } from 'next'
-import type { Blog as BlogType } from '../types/type'
+
+import { Layout } from '../components/Layout'
 import { getAllBlogData } from '../libs/fetch'
-import Link from 'next/link'
+import { BlogCard } from '../components/organisms/BlogCard'
+import type { Blog as BlogType } from '../types/type'
+import { css } from '@emotion/react'
 
 interface StaticProps {
   blog: BlogType[]
@@ -11,12 +13,10 @@ interface StaticProps {
 const Blog: NextPage<StaticProps> = ({ blog }) => {
   return (
     <Layout title='ブログ'>
-      <p>blog page</p>
-      <ul>
+      <h1>BLOG</h1>
+      <ul css={cardList}>
         {blog.map((blog) => (
-          <li key={blog.id}>
-            <Link href={`/blog/${blog.id}`}>{blog.title}</Link>
-          </li>
+          <BlogCard key={blog.id} {...blog} />
         ))}
       </ul>
     </Layout>
@@ -31,3 +31,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   }
 }
 export default Blog
+
+const cardList = css`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-around;
+`

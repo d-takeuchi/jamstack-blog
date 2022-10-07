@@ -11,10 +11,10 @@ import { setupServer } from 'msw/node'
 initTestHelpers()
 
 const handlers = [
-  rest.get(`${process.env.API_ENDPOINT}/blog`, (req, res, ctx) => {
+  rest.get(`${process.env.NEXT_PUBLIC_API_URL}/blog`, (req, res, ctx) => {
     return res(
       ctx.set({
-        'X-MICROCMS-API-KEY': process.env.API_KEY,
+        'X-MICROCMS-API-KEY': process.env.NEXT_PUBLIC_API_KEY,
       }),
       ctx.status(200),
       ctx.json([
