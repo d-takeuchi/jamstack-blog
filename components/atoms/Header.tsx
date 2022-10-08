@@ -23,9 +23,9 @@ const mainNav = css`
     margin-left: 36px;
   }
   a {
-    color: #432;
+    color: #fffffe;
     &:hover {
-      color: #0bd;
+      color: #f9bc60;
     }
   }
 `

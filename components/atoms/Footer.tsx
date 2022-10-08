@@ -12,7 +12,7 @@ const footer = css`
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #432;
+  background: #abd1c6;
   text-align: center;
   padding: 26px 0;
   margin-top: 50px;
