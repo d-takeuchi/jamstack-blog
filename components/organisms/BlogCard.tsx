@@ -7,14 +7,16 @@ export const BlogCard: React.FC<Props> = ({ id, title, thumbnail }) => {
   return (
     <li css={cardStyle}>
       <Link href={`/blog/${id}`}>
-        <h3 css={cardTitle}> {title} </h3>
-        <figure css={thumbnailStyle}>
-          <Image
-            src={thumbnail.url}
-            width={thumbnail.width}
-            height={thumbnail.height}
-          />
-        </figure>
+        <div>
+          <h3 css={cardTitle}>{title}</h3>
+          <figure css={thumbnailStyle}>
+            <Image
+              src={thumbnail.url}
+              width={thumbnail.width}
+              height={thumbnail.height}
+            />
+          </figure>
+        </div>
       </Link>
     </li>
   )
@@ -28,6 +30,9 @@ const cardStyle = css`
   text-decoration: none;
   margin: 20px;
   border-radius: 10px;
+  :hover {
+    cursor: pointer;
+  }
 `
 const cardTitle = css`
   font-size: 1.25rem;
