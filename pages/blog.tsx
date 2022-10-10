@@ -34,6 +34,6 @@ export default Blog
 
 const cardList = css`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: space-around;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `
