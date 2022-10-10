@@ -28,6 +28,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
   return {
     props: { ...blog },
+    revalidate: 10,
   }
 }
 export default Blog

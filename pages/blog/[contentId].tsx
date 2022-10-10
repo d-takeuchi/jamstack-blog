@@ -2,21 +2,21 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { Layout } from '../../components/Layout'
 import { Blog } from '../../types/type'
-import { getBlogData, getAllBlogIds } from '../../libs/fetch'
+import { getBlogData } from '../../libs/fetch'
 import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const blog = await getBlogData(ctx.params.contentId as string)
   return {
     props: blog.blog,
+    revalidate: 10,
   }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllBlogIds()
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking', //キャッシュがまだない時にはSSRを行う
   }
 }
 
