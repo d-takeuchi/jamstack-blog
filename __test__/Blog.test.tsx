@@ -75,8 +75,8 @@ describe(`ブログページ`, () => {
     const { page } = await getPage({
       route: '/blog',
     })
-    // render(page)
-    // expect(await screen.findByText('ブログ')).toBeInTheDocument()
-    // expect(await screen.findByText('テストタイトル2')).toBeInTheDocument()
+    render(page)
+    expect(await screen.findByText('テストタイトル1')).toBeInTheDocument()
+    expect(await screen.findByText('テストタイトル2')).toBeInTheDocument()
   })
 })
